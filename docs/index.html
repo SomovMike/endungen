@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Тренажёр окончаний немецких прилагательных: спринт на 60 секунд и режим обучения.">
+<meta name="theme-color" content="#EDF0F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1015" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Endungen">
+<meta property="og:description" content="Окончания немецких прилагательных на скорость. Сколько успеешь за 60 секунд?">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Endungen">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Adjektiv-Endungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  /* Layout: one phone-width column. Home scrolls; the drill is a fixed stack: status bar, fuse, sentence, five fixed keys under the thumb. */
+  --paper:#EDF0F3;
+  --surface:#FFFFFF;
+  --ink:#131820;
+  --muted:#5D6775;
+  --line:#D5DBE2;
+  --accent:#F2B400;
+  --on-accent:#1B1500;
+  --scrim:rgba(10,14,20,.5);
+  --g-m:#1F5FC4;
+  --g-f:#C42F5C;
+  --g-n:#13854C;
+  --g-pl:#7A4CCB;
+  --ok:#11905A;
+  --bad:#D4373D;
+  --warn:#A86E00;
+  --ok-bg:#D9F1E4;
+  --bad-bg:#FADDDE;
+  --warn-bg:#F8EBC9;
+  --new-bg:#E1E6EC;
+  --font-d:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-m:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0D1015;--surface:#161B22;--ink:#E7EBF0;--muted:#97A1AE;--line:#2A313B;
+  --accent:#FFC629;--on-accent:#1B1500;--scrim:rgba(0,0,0,.6);
+  --g-m:#72A6FF;--g-f:#FF7BA3;--g-n:#4DCB8B;--g-pl:#B898FF;
+  --ok:#3FD08C;--bad:#FF6B6E;--warn:#F2B53D;
+  --ok-bg:#12382A;--bad-bg:#45191C;--warn-bg:#3D2F10;--new-bg:#1E242D;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D1015;--surface:#161B22;--ink:#E7EBF0;--muted:#97A1AE;--line:#2A313B;
+  --accent:#FFC629;--on-accent:#1B1500;--scrim:rgba(0,0,0,.6);
+  --g-m:#72A6FF;--g-f:#FF7BA3;--g-n:#4DCB8B;--g-pl:#B898FF;
+  --ok:#3FD08C;--bad:#FF6B6E;--warn:#F2B53D;
+  --ok-bg:#12382A;--bad-bg:#45191C;--warn-bg:#3D2F10;--new-bg:#1E242D;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-d);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+#app{max-width:560px;margin:0 auto;padding-inline:16px;height:100%}
+[hidden]{display:none!important}
+.mono{font-family:var(--font-m);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ---------- home ---------- */
+#home{padding-block:28px 56px;display:flex;flex-direction:column;gap:30px}
+.mast{display:flex;flex-direction:column;gap:10px}
+.mast-top{display:flex;align-items:flex-end;justify-content:space-between;gap:8px 16px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(2.6rem,12vw,3.6rem);font-weight:800;letter-spacing:-.035em;line-height:.95}
+h1 .hs{display:inline-block;border-bottom:.11em solid var(--accent);padding-inline:.03em;margin-left:.03em;line-height:.9}
+.lede{margin:0;color:var(--muted);max-width:44ch;text-wrap:pretty}
+.sync{font-size:.75rem;color:var(--muted);font-family:var(--font-m)}
+.sync::before{content:"○ "}
+.sync.ok::before{content:"● ";color:var(--ok)}
+.sync.err::before{content:"● ";color:var(--bad)}
+.label{margin:0 0 10px;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.mode{display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line)}
+.mode[aria-checked="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.mode-name{font-weight:800;font-size:1.08rem;letter-spacing:-.01em}
+.mode-sub{font-size:.82rem;color:var(--muted);line-height:1.3}
+.mode[aria-checked="true"] .mode-sub{color:var(--paper);opacity:.75}
+.levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.lvl.main{grid-column:1 / -1}
+.lvl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;text-align:left;padding:13px 16px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line)}
+.lvl[aria-checked="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.lvl-name{font-weight:700;font-size:1.05rem}
+.lvl-sub{grid-column:1;color:var(--muted);font-size:.88rem;min-width:0}
+.lvl-rec{grid-row:1 / span 2;grid-column:2;text-align:right;font-family:var(--font-m);font-variant-numeric:tabular-nums;font-size:.95rem;font-weight:600}
+.lvl.focus{grid-template-columns:minmax(0,1fr);padding:11px 14px}
+.lvl.focus .lvl-rec{grid-row:auto;grid-column:1;text-align:left;margin-top:4px}
+.lvl.focus .lvl-rec small{display:inline;margin-left:6px}
+.lvl-rec small{display:block;color:var(--muted);font-size:.68rem;font-family:var(--font-d);font-weight:500;letter-spacing:.04em}
+.done{display:inline-block;margin-left:8px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--ok-bg);color:var(--ok);vertical-align:2px;letter-spacing:.05em;text-transform:uppercase}
+.opts{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin-top:14px}
+.seg{display:inline-flex;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:3px}
+.seg button{padding:8px 14px;border-radius:9px;font-weight:600;color:var(--muted)}
+.seg button[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+.switch{display:flex;align-items:center;gap:10px;font-size:.92rem;cursor:pointer}
+.switch input{width:20px;height:20px;accent-color:var(--ink);margin:0}
+.start{width:100%;padding:18px;border-radius:16px;background:var(--accent);color:var(--on-accent);font-size:1.3rem;font-weight:800;letter-spacing:-.01em}
+.start:active{transform:translateY(1px)}
+.start.sticky{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:2;box-shadow:0 6px 24px -6px var(--scrim),0 0 0 6px var(--paper)}
+#home > .start.sticky + div{margin-top:-18px}
+.ghost{width:100%;padding:16px;border-radius:16px;border:1.5px solid var(--line);background:var(--surface);font-weight:700;font-size:1.05rem}
+.fine{margin:10px 2px 0;font-size:.85rem;color:var(--muted);text-wrap:pretty}
+
+.map-wrap{overflow-x:auto}
+.map{border-collapse:separate;border-spacing:4px;width:100%;font-family:var(--font-m);font-size:.95rem;margin-inline:-4px}
+.map th{font-weight:600;color:var(--muted);font-size:.72rem;text-align:center;padding:2px 4px;font-family:var(--font-d);letter-spacing:.06em}
+.map th[scope="row"]{text-align:left;white-space:nowrap}
+.map th .cs{color:var(--ink);font-weight:700}
+.map td{text-align:center;padding:9px 4px;border-radius:8px;background:var(--new-bg);font-weight:600;color:var(--muted)}
+.map td.good{background:var(--ok-bg);color:var(--ok)}
+.map td.mid{background:var(--warn-bg);color:var(--warn)}
+.map td.bad{background:var(--bad-bg);color:var(--bad)}
+.map td.off{opacity:.3}
+.map tr.sep th,.map tr.sep td{border-top:10px solid transparent;background-clip:padding-box}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:.8rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--new-bg)}
+.legend .lg-good::before{background:var(--ok)}
+.legend .lg-mid::before{background:var(--warn)}
+.legend .lg-bad::before{background:var(--bad)}
+.map-tools{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.linkbtn{font-size:.82rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line);font-size:.9rem;align-items:baseline}
+.hist .h-d{color:var(--muted);font-family:var(--font-m);font-size:.78rem}
+.hist .h-t{font-family:var(--font-m);font-weight:600;font-variant-numeric:tabular-nums}
+.hist .h-e{font-family:var(--font-m);color:var(--bad);font-size:.85rem;min-width:3ch;text-align:right}
+.hist .h-e.zero{color:var(--ok)}
+.empty{color:var(--muted);font-size:.9rem;margin:0}
+
+details.rule{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px}
+details.rule summary{font-weight:700;cursor:pointer}
+details.rule ul{margin:10px 0 2px;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+
+/* ---------- drill ---------- */
+.drill{height:100%;display:flex;flex-direction:column;padding-block:10px 14px;gap:10px;user-select:none;-webkit-user-select:none}
+.bar{display:flex;align-items:center;gap:14px}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-size:1rem;flex:none}
+.prog{font-weight:600}
+.errs{color:var(--bad);font-weight:600}
+.clock{margin-left:auto;font-size:1.3rem;font-weight:600}
+.fuse{height:6px;border-radius:3px;background:var(--line);overflow:hidden;flex:none}
+.fuse i{display:block;height:100%;width:0;background:var(--accent)}
+.fuse.late i{background:var(--bad)}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;min-height:0;overflow-y:auto}
+.chips{display:flex;gap:8px;min-height:28px;flex-wrap:wrap}
+.chip{font-family:var(--font-m);font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid var(--line);color:var(--muted)}
+.chip.case{color:var(--ink);border-color:var(--ink)}
+.chip.g-m,.noun.g-m{color:var(--g-m)} .chip.g-m{border-color:var(--g-m)}
+.chip.g-f,.noun.g-f{color:var(--g-f)} .chip.g-f{border-color:var(--g-f)}
+.chip.g-n,.noun.g-n{color:var(--g-n)} .chip.g-n{border-color:var(--g-n)}
+.chip.g-pl,.noun.g-pl{color:var(--g-pl)} .chip.g-pl{border-color:var(--g-pl)}
+.chip.rep{border-style:dashed}
+.sentence{margin:0;font-size:clamp(1.55rem,6.6vw,2.3rem);line-height:1.34;font-weight:500;letter-spacing:-.01em;text-wrap:balance;min-width:0}
+.ctx{color:var(--muted)}
+.np{font-weight:700}
+.adj{white-space:nowrap}
+.slot{display:inline-block;min-width:1.4em;border-bottom:.12em solid var(--accent);line-height:1.02;text-align:left}
+.slot.ok{color:var(--ok);border-color:var(--ok)}
+.slot.fix{color:var(--ok);border-color:var(--bad)}
+.tlabel{font-family:var(--font-m);font-size:.9rem;color:var(--muted);min-height:1.3em;margin:-6px 0 0}
+.tlabel.slow{color:var(--warn)}
+.tlabel.pen{color:var(--bad);font-weight:600}
+.fb{background:var(--surface);border:1.5px solid var(--bad);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.fb-top{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;font-size:1.02rem}
+.fb-pen{color:var(--bad);font-family:var(--font-m);font-weight:600}
+.fb-top b{color:var(--ok)}
+.fb-top s{color:var(--bad)}
+.fb-why{margin:0;color:var(--muted);font-size:.93rem;text-wrap:pretty}
+.next{margin-top:4px;padding:13px;border-radius:12px;background:var(--ink);color:var(--paper);font-weight:700;font-size:1.02rem}
+.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;flex:none}
+.key{height:76px;border-radius:16px;background:var(--surface);border:1.5px solid var(--line);font-family:var(--font-m);font-size:1.4rem;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;touch-action:manipulation;transition:transform .06s,background-color .12s}
+.key:active{transform:scale(.95)}
+.key .kn{font-size:.62rem;color:var(--muted);display:none;font-weight:500}
+@media (hover:hover) and (pointer:fine){.key .kn{display:block}}
+.key.hit{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.key.miss{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);animation:shake .28s}
+.key.want{border-color:var(--ok);color:var(--ok);box-shadow:inset 0 0 0 2px var(--ok)}
+@keyframes shake{0%,100%{translate:0}25%{translate:-5px}75%{translate:5px}}
+@media (prefers-reduced-motion:reduce){.key.miss{animation:none}.key{transition:none}}
+
+.sheet{position:fixed;inset:0;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10}
+.sheet-card{background:var(--surface);border-radius:20px;padding:20px;max-width:520px;width:100%;display:flex;flex-direction:column;gap:12px}
+.sheet-card h3{margin:0;font-size:1.2rem}
+.sheet-card p{margin:0;color:var(--muted)}
+
+/* ---------- result ---------- */
+#result{padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.r-head{display:flex;flex-direction:column;gap:6px}
+.r-big{font-size:clamp(3.2rem,17vw,4.6rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+.r-unit{margin:0;font-weight:600}
+.r-rec{margin:0;color:var(--muted)}
+.r-rec.new{color:var(--ok);font-weight:700}
+.r-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+.r-stats div{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.r-stats dt{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.r-stats dd{margin:2px 0 0;font-family:var(--font-m);font-variant-numeric:tabular-nums;font-size:1.35rem;font-weight:600}
+.goal{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.goal li{display:flex;gap:10px;align-items:baseline}
+.goal li::before{content:"✕";font-family:var(--font-m);color:var(--bad);width:1.2em}
+.goal li.y::before{content:"✓";color:var(--ok)}
+.goal-note{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+.goal-note.win{color:var(--ok);font-weight:700}
+.misses{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.misses li{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.misses .ms{font-size:1.1rem;line-height:1.35}
+.misses .mw{font-size:.86rem;color:var(--muted)}
+.r-actions{display:flex;flex-direction:column;gap:10px}
+.share-note{margin:0;font-size:.86rem;color:var(--muted);text-align:center;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- HOME -->
+  <section id="home">
+    <header class="mast">
+      <div class="mast-top">
+        <h1>Endung<span class="hs">en</span></h1>
+        <span id="sync" class="sync" hidden></span>
+      </div>
+      <p class="lede">Окончания прилагательных в Nom, Akk и Dat. Каждый раз новая фраза, пять кнопок, таймер и штраф за ошибку.</p>
+    </header>
+
+    <section aria-labelledby="mode-h">
+      <h2 class="label" id="mode-h">Режим</h2>
+      <div class="modes" role="radiogroup" aria-labelledby="mode-h">
+        <button type="button" role="radio" class="mode" id="mode-sprint"><span class="mode-name">Спринт · 60 с</span><span class="mode-sub">полный рандом, сколько успеешь</span></button>
+        <button type="button" role="radio" class="mode" id="mode-learn"><span class="mode-name">Обучение</span><span class="mode-sub">разбор ошибок, слабые места чаще</span></button>
+      </div>
+    </section>
+
+    <section aria-labelledby="lv-h">
+      <h2 class="label" id="lv-h">Ступень</h2>
+      <div id="levels" class="levels" role="radiogroup" aria-labelledby="lv-h"></div>
+      <div class="opts">
+        <div class="seg" id="lenSeg" role="radiogroup" aria-label="Длина тренировки">
+          <button type="button" role="radio" data-len="20" id="len20">20 карточек</button>
+          <button type="button" role="radio" data-len="40" id="len40">40</button>
+        </div>
+        <label class="switch" for="hints"><input type="checkbox" id="hints"> подсказки рода и падежа</label>
+      </div>
+    </section>
+
+    <button type="button" id="start" class="start sticky">Старт</button>
+    <div>
+      <p class="fine" id="modeNote"></p>
+    </div>
+
+    <section aria-labelledby="map-h">
+      <div class="map-tools">
+        <h2 class="label" id="map-h">Карта окончаний</h2>
+        <button type="button" class="linkbtn" id="maskBtn">спрятать окончания</button>
+      </div>
+      <div class="map-wrap"><table class="map" id="map"></table></div>
+      <div class="legend">
+        <span class="lg-good">уверенно</span><span class="lg-mid">медленно или мало данных</span><span class="lg-bad">ошибаешься</span><span>ещё не было</span>
+      </div>
+    </section>
+
+    <details class="rule">
+      <summary>Правило в одну мысль</summary>
+      <ul>
+        <li>Окончание должно где-то показать род и падеж. Если артикль это уже сделал (der, die, das, den, dem), прилагательному хватает <b>-e</b> или <b>-en</b>.</li>
+        <li>После der/dieser/jeder <b>-e</b> только в 5 клетках: Nom m/f/n и Akk f/n. Всё остальное <b>-en</b>.</li>
+        <li>ein, kein, mein без окончания не говорят, m это или n. Тогда прилагательное добирает: <b>-er</b> (Nom m), <b>-es</b> (Nom/Akk n).</li>
+        <li>Без артикля прилагательное берёт окончание самого артикля: der → -er, das → -es, dem → -em, der (Dat f) → -er. zwei, viele, einige, viel, etwas считаются как «без артикля».</li>
+        <li>Dat после любого артикля и мн. ч. после артикля: всегда <b>-en</b>.</li>
+      </ul>
+    </details>
+
+    <section aria-labelledby="hist-h">
+      <h2 class="label" id="hist-h">Последние тренировки</h2>
+      <ol id="hist" class="hist"></ol>
+      <p id="histEmpty" class="empty">Здесь появятся результаты каждой тренировки.</p>
+    </section>
+  </section>
+
+  <!-- DRILL -->
+  <section id="game" class="drill" hidden>
+    <div class="bar">
+      <button type="button" id="quit" class="icon-btn" aria-label="Прервать тренировку">✕</button>
+      <span id="prog" class="mono prog">1 / 20</span>
+      <span id="errs" class="mono errs"></span>
+      <span id="clock" class="mono clock">0.0 с</span>
+    </div>
+    <div class="fuse" id="fuse" aria-hidden="true"><i id="fuseBar"></i></div>
+    <div class="stage" id="stage">
+      <div class="chips" id="chips"></div>
+      <p class="sentence" id="sentence" aria-live="polite"></p>
+      <p class="tlabel" id="tlabel"></p>
+      <div class="fb" id="fb" hidden></div>
+    </div>
+    <div class="keys" id="keys"></div>
+
+    <div class="sheet" id="quitSheet" hidden>
+      <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="quit-h">
+        <h3 id="quit-h">Прервать тренировку?</h3>
+        <p>Результат не попадёт в рекорды. Статистика по клеткам таблицы уже сохранена.</p>
+        <button type="button" class="start" id="resume">Продолжить</button>
+        <button type="button" class="ghost" id="quitYes">Выйти в меню</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" hidden>
+    <div class="r-head">
+      <h2 class="label" id="rLevel"></h2>
+      <div class="r-big mono" id="rTime"></div>
+      <p class="r-unit" id="rUnit"></p>
+      <p class="r-rec" id="rRec"></p>
+    </div>
+    <dl class="r-stats" id="rStats"></dl>
+    <section id="rGoalWrap">
+      <h2 class="label">Критерий «ступень пройдена»</h2>
+      <ul class="goal" id="rGoal"></ul>
+      <p class="goal-note" id="rGoalNote"></p>
+    </section>
+    <section id="rMissWrap">
+      <h2 class="label">Разбор ошибок</h2>
+      <ul class="misses" id="rMiss"></ul>
+    </section>
+    <div class="r-actions">
+      <button type="button" class="start" id="again">Ещё раз</button>
+      <button type="button" class="ghost" id="share">Поделиться результатом</button>
+      <p class="share-note" id="shareNote" hidden></p>
+      <button type="button" class="ghost" id="toMenu">Меню</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* ================= grammar ================= */
+const PENALTY = 3000, TARGET = 2000;
+const CASES = ['N','A','D'], GN = ['m','f','n','pl'];
+const CASE_LBL = {N:'Nom', A:'Akk', D:'Dat'};
+const GN_LBL = {m:'m', f:'f', n:'n', pl:'Pl'};
+const COL_LBL = {w:'der', x:'ein', s:'—'};
+const OPTS = ['e','en','er','es','em'];
+
+// w = после der-слов (слабое), x = после ein-слов (смешанное), s = без артикля (сильное)
+const END = {
+  w:{N:{m:'e', f:'e', n:'e', pl:'en'}, A:{m:'en',f:'e', n:'e', pl:'en'}, D:{m:'en',f:'en',n:'en',pl:'en'}},
+  x:{N:{m:'er',f:'e', n:'es',pl:'en'}, A:{m:'en',f:'e', n:'es',pl:'en'}, D:{m:'en',f:'en',n:'en',pl:'en'}},
+  s:{N:{m:'er',f:'e', n:'es',pl:'e' }, A:{m:'en',f:'e', n:'es',pl:'e' }, D:{m:'em',f:'er',n:'em',pl:'en'}}
+};
+const DER = {N:{m:'der',f:'die',n:'das',pl:'die'}, A:{m:'den',f:'die',n:'das',pl:'die'}, D:{m:'dem',f:'der',n:'dem',pl:'den'}};
+const EIN = {N:{m:'',f:'e',n:'',pl:'e'}, A:{m:'en',f:'e',n:'',pl:'e'}, D:{m:'em',f:'er',n:'em',pl:'en'}};
+
+const LEVELS = [
+  {id:'1', name:'Ступень 1', sub:'der · dieser · jeder · alle', cols:['w']},
+  {id:'2', name:'Ступень 2', sub:'+ ein · kein · mein · unser …', cols:['w','x']},
+  {id:'3', name:'Ступень 3', sub:'+ без артикля · zwei · viele · etwas', cols:['w','x','s']},
+  {id:'x', name:'Только ein', sub:'kein · mein · unser', cols:['x'], focus:true},
+  {id:'s', name:'Без артикля', sub:'kalter Kaffee', cols:['s'], focus:true}
+];
+
+/* p = люди и животные, t = вещи и места, m = еда и вещества (без мн. ч.) */
+const NOUN_SRC = {
+  p:{
+    m:'Mann:Männer Lehrer:Lehrer Freund:Freunde Arzt:Ärzte Vater:Väter Bruder:Brüder Onkel:Onkel Sohn:Söhne Koch:Köche Chef:Chefs Fahrer:Fahrer Verkäufer:Verkäufer Opa:Opas Schüler:Schüler Sänger:Sänger Spieler:Spieler Gast:Gäste König:Könige Bäcker:Bäcker Maler:Maler Hund:Hunde Vogel:Vögel Fisch:Fische Hamster:Hamster',
+    f:'Frau:Frauen Lehrerin:Lehrerinnen Freundin:Freundinnen Ärztin:Ärztinnen Mutter:Mütter Schwester:Schwestern Tante:Tanten Tochter:Töchter Chefin:Chefinnen Oma:Omas Nachbarin:Nachbarinnen Kollegin:Kolleginnen Studentin:Studentinnen Sängerin:Sängerinnen Köchin:Köchinnen Katze:Katzen Maus:Mäuse Kuh:Kühe Ente:Enten Spinne:Spinnen',
+    n:'Kind:Kinder Mädchen:Mädchen Baby:Babys Tier:Tiere Pferd:Pferde Schaf:Schafe Kaninchen:Kaninchen Huhn:Hühner Schwein:Schweine Pony:Ponys Kätzchen:Kätzchen Enkelkind:Enkelkinder Krokodil:Krokodile Känguru:Kängurus'
+  },
+  t:{
+    m:'Tisch:Tische Stuhl:Stühle Schrank:Schränke Computer:Computer Schlüssel:Schlüssel Koffer:Koffer Mantel:Mäntel Pullover:Pullover Rock:Röcke Schuh:Schuhe Hut:Hüte Ball:Bälle Teller:Teller Löffel:Löffel Fernseher:Fernseher Stift:Stifte Brief:Briefe Film:Filme Zug:Züge Bus:Busse Garten:Gärten Park:Parks Turm:Türme Berg:Berge Ring:Ringe Rucksack:Rucksäcke Teppich:Teppiche Spiegel:Spiegel Kalender:Kalender Laden:Läden Bahnhof:Bahnhöfe Schal:Schals',
+    f:'Tasche:Taschen Lampe:Lampen Tür:Türen Uhr:Uhren Jacke:Jacken Hose:Hosen Brille:Brillen Flasche:Flaschen Tasse:Tassen Stadt:Städte Straße:Straßen Wohnung:Wohnungen Küche:Küchen Kirche:Kirchen Blume:Blumen Kamera:Kameras Zeitung:Zeitungen Karte:Karten Brücke:Brücken Wand:Wände Bank:Bänke Gabel:Gabeln Vase:Vasen Kiste:Kisten Schule:Schulen Bluse:Blusen Kette:Ketten Decke:Decken Mütze:Mützen',
+    n:'Buch:Bücher Auto:Autos Haus:Häuser Fenster:Fenster Bett:Betten Bild:Bilder Handy:Handys Fahrrad:Fahrräder Hemd:Hemden Kleid:Kleider Glas:Gläser Messer:Messer Sofa:Sofas Zimmer:Zimmer Hotel:Hotels Restaurant:Restaurants Geschenk:Geschenke Spiel:Spiele Heft:Hefte Regal:Regale Schiff:Schiffe Flugzeug:Flugzeuge Dorf:Dörfer Schloss:Schlösser Kissen:Kissen Radio:Radios Foto:Fotos Boot:Boote Theater:Theater Museum:Museen Kino:Kinos'
+  },
+  m:{
+    m:'Kaffee Tee Wein Saft Käse Zucker Reis Honig Kuchen Quark Senf Salat Schinken Pfeffer Sekt Kakao',
+    f:'Milch Butter Sahne Schokolade Suppe Wurst Marmelade Pizza Soße Limonade Pasta Salami Torte',
+    n:'Wasser Brot Bier Obst Gemüse Fleisch Öl Eis Salz Mehl Müsli Essen Popcorn'
+  }
+};
+const NOUNS = {};
+for (const k in NOUN_SRC) {
+  NOUNS[k] = {all:[]};
+  for (const g in NOUN_SRC[k]) {
+    NOUNS[k][g] = NOUN_SRC[k][g].split(' ').map(s => { const [sg, pl] = s.split(':'); return {sg, pl: pl || null, g}; });
+    NOUNS[k].all.push(...NOUNS[k][g]);
+  }
+}
+const ADJ = {
+  p:'alt jung nett freundlich klug groß klein neu lustig ruhig laut stark schnell krank glücklich berühmt fremd faul fleißig schön dick dünn süß traurig hungrig frech mutig schlau brav wild'.split(' '),
+  t:'neu alt groß klein schön billig modern toll hässlich rot blau grün gelb schwarz weiß braun grau bunt sauber schmutzig praktisch schwer leicht wunderbar komisch seltsam schick hell'.split(' '),
+  m:'frisch kalt warm heiß gut lecker schlecht billig gesund deutsch italienisch französisch spanisch echt fein süß typisch'.split(' ')
+};
+// [падеж, число s|p|*, виды существительных, шаблон]
+const FRAMES = [
+  ['N','s','ptm','Das ist {}.'], ['N','s','ptm','Hier ist {}.'], ['N','s','ptm','Wo ist {}?'], ['N','s','pt','Da drüben ist {}.'],
+  ['N','s','p','{} wohnt hier.'], ['N','s','p','{} schläft schon.'], ['N','s','t','{} gefällt mir.'], ['N','s','t','{} ist kaputt.'],
+  ['N','s','m','{} schmeckt super.'], ['N','s','ptm','{} ist leider weg.'],
+  ['N','p','pt','Das sind {}.'], ['N','p','pt','Hier sind {}.'], ['N','p','pt','Wo sind {}?'], ['N','p','p','{} wohnen hier.'],
+  ['N','p','p','{} schlafen schon.'], ['N','p','t','{} gefallen mir.'], ['N','p','pt','{} sind leider weg.'],
+  ['A','*','pt','Ich sehe {}.'], ['A','*','ptm','Ich suche {}.'], ['A','*','p','Ich kenne {}.'], ['A','*','p','Wir fragen {}.'],
+  ['A','*','p','Sie besucht {}.'], ['A','*','p','Ich rufe {} an.'], ['A','*','p','Das Geschenk ist für {}.'], ['A','*','pt','Er geht ohne {}.'],
+  ['A','*','tm','Ich kaufe {}.'], ['A','*','tm','Wir brauchen {}.'], ['A','*','tm','Ich nehme {}.'], ['A','*','ptm','Sie mag {}.'],
+  ['A','*','tm','Hast du {}?'], ['A','s','m','Er bestellt {}.'], ['A','*','ptm','Ich finde {} toll.'],
+  ['D','*','p','Ich spreche mit {}.'], ['D','*','p','Er hilft {}.'], ['D','*','p','Wir danken {}.'], ['D','*','p','Das Buch gehört {}.'],
+  ['D','*','p','Sie tanzt mit {}.'], ['D','*','pt','Sie spielt mit {}.'], ['D','*','pt','Ich stehe neben {}.'], ['D','*','tm','Was machst du mit {}?'],
+  ['D','*','t','Die Katze sitzt hinter {}.'], ['D','*','t','Wir warten vor {}.'], ['D','*','tm','Ich bin zufrieden mit {}.'],
+  ['D','s','m','Es riecht nach {}.'], ['D','s','m','Ich koche mit {}.'], ['D','s','m','Ich backe mit {}.']
+];
+
+/* ================= helpers ================= */
+const $ = id => document.getElementById(id);
+const rnd = n => Math.floor(Math.random() * n);
+const pick = a => a[rnd(a.length)];
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const fmt = ms => (ms / 1000).toFixed(1) + ' с';
+const datPl = w => /[ns]$/.test(w) ? w : w + 'n';
+function wpick(pairs) {
+  let sum = 0; for (const p of pairs) sum += p[1];
+  let r = Math.random() * sum;
+  for (const p of pairs) { r -= p[1]; if (r < 0) return p[0]; }
+  return pairs[pairs.length - 1][0];
+}
+const recentN = [], recentA = [], recentF = [];
+function pickFresh(arr, recent, id, keep) {
+  let x = null;
+  for (let i = 0; i < 30; i++) { const c = pick(arr); if (!recent.includes(id(c))) { x = c; break; } }
+  if (!x) x = pick(arr);
+  recent.push(id(x)); if (recent.length > keep) recent.shift();
+  return x;
+}
+
+/* ================= card generation ================= */
+function pickDet(col, c, g, kind, start) {
+  const pl = g === 'pl';
+  if (col === 'w') {
+    const opts = pl ? [['der',5],['dies',3],['all',2]]
+                    : [['der',6],['dies',3]].concat(c === 'N' && !start ? [] : [['jed',2]]);
+    const k = wpick(opts);
+    return k === 'der' ? DER[c][g] : k + END.s[c][g];   // dies-er, jed-en, all-e: окончания как у der
+  }
+  if (col === 'x') {
+    const poss = [['mein',1],['dein',1],['sein',1],['ihr',1],['unser',1],['euer',1]];
+    const k = wpick(pl ? [['kein',3]].concat(poss) : [['ein',6],['kein',3]].concat(poss));
+    const e = EIN[c][g];
+    if (k === 'euer') return e ? 'eur' + e : 'euer';
+    return k + e;
+  }
+  if (pl) {
+    const k = wpick([['',8],['zwei',1],['drei',1],['vier',.6],['viele',1.6],['einige',1],['ein paar',1]]);
+    if ((k === 'viele' || k === 'einige') && c === 'D') return k + 'n';
+    return k;
+  }
+  return wpick([['',7],['viel',1.2],['etwas',1.2]]);
+}
+
+function makeCard(key, retry) {
+  const col = key[0], c = key[1], g = key.slice(2), pl = g === 'pl';
+  const kind = (col === 's' && !pl) ? 'm' : pl ? wpick([['p',1],['t',1.2]]) : wpick([['p',1],['t',1.2],['m',.45]]);
+  const nounObj = pickFresh(pl ? NOUNS[kind].all : NOUNS[kind][g], recentN, x => x.sg, 16);
+  const adj = pickFresh(ADJ[kind], recentA, x => x, 10);
+  const frames = FRAMES.filter(f => f[0] === c && (f[1] === '*' || f[1] === (pl ? 'p' : 's')) && f[2].includes(kind));
+  const frame = pickFresh(frames, recentF, f => f[3], 3)[3];
+  const start = frame.startsWith('{}');
+  const det = pickDet(col, c, g, kind, start);
+  const noun = pl ? (c === 'D' ? datPl(nounObj.pl) : nounObj.pl) : nounObj.sg;
+  return {key, col, c, g, kind, det, adj, noun, frame, ans: END[col][c][g], retry: !!retry};
+}
+
+function sentenceHTML(card, fill, slotCls, colorNoun) {
+  const [pre, post] = card.frame.split('{}');
+  let det = card.det, adj = card.adj;
+  if (pre === '') { if (det) det = cap(det); else adj = cap(adj); }
+  const noun = `<span class="noun${colorNoun ? ' g-' + card.g : ''}">${card.noun}</span>`;
+  const np = (det ? `<span class="det">${det}</span> ` : '') +
+    `<span class="adj">${adj}<span class="slot ${slotCls || ''}">${fill || ''}</span></span> ` + noun;
+  return (pre ? `<span class="ctx">${pre}</span>` : '') + `<span class="np">${np}</span><span class="ctx">${post}</span>`;
+}
+
+const nb = s => s.replace(/(^|[\s(→])-(e[nrsm]?)(?![a-zäöüß])/g, '$1\u2011$2');
+function explain(card) { return nb(explainRaw(card)); }
+function explainRaw(card) {
+  const {col, c, g, det} = card;
+  if (col === 'w') {
+    if (c === 'D') return 'Dat после артикля → всегда -en.';
+    if (g === 'pl') return 'Мн. число после артикля → всегда -en.';
+    if (c === 'N') return 'Nom ед. ч. после der/die/das (dieser, jeder): артикль уже всё показал → -e.';
+    if (g === 'm') return 'Akk m: den уже показал падеж → -en. В этой колонке -e только в 5 клетках: Nom m/f/n и Akk f/n.';
+    return `Akk ${g} выглядит как Nom (${g === 'f' ? 'die' : 'das'}) → -e.`;
+  }
+  if (col === 'x') {
+    if (c === 'D') return 'Dat после артикля → всегда -en.';
+    if (g === 'pl') return 'keine / meine / unsere во мн. ч. → всегда -en.';
+    if (g === 'm' && c === 'N') return `«${det}» без окончания не говорит, m это или n → прилагательное добирает окончание от der: -er.`;
+    if (g === 'n') return `«${det}» без окончания не говорит, m это или n → прилагательное добирает окончание от das: -es.`;
+    if (g === 'f') return `«${det}» звучит как die → -e.`;
+    return `«${det}» уже показал Akk m → -en.`;
+  }
+  let s = `Артикля нет → прилагательное само берёт окончание артикля: ${DER[c][g]} → -${END.s[c][g]}.`;
+  if (det) s += ` «${det}» не артикль, считается как «без артикля».`;
+  return s;
+}
+
+/* ================= storage ================= */
+const LS = 'endungen.v1';
+const blank = () => ({v:1, upd:0, stats:{}, rec:{}, hist:[], done:{}, prefs:{mode:'sprint', lv:'1', len:20, hints:true}});
+function loadLocal() {
+  try {
+    const s = JSON.parse(localStorage.getItem(LS));
+    if (s && s.v === 1) { const b = blank(); return Object.assign(b, s, {prefs: Object.assign(b.prefs, s.prefs)}); }
+  } catch (e) {}
+  return blank();
+}
+let store = loadLocal();
+function writeLocal() { try { localStorage.setItem(LS, JSON.stringify(store)); } catch (e) {} }
+function saveLocal() { store.upd = Date.now(); writeLocal(); }
+
+// спринт: больше верных лучше (при равенстве меньше ошибок); обучение: меньше времени лучше
+function better(k, x, y) {
+  if (k.startsWith('sp-')) return x.score > y.score || (x.score === y.score && x.err < y.err);
+  return x.ms < y.ms;
+}
+function merge(a, b) {
+  const out = blank();
+  const newer = (b.upd || 0) > (a.upd || 0) ? b : a;
+  out.upd = Math.max(a.upd || 0, b.upd || 0);
+  out.prefs = Object.assign(out.prefs, newer.prefs);
+  const keys = new Set([...Object.keys(a.stats || {}), ...Object.keys(b.stats || {})]);
+  for (const k of [...keys].sort()) {
+    const x = a.stats && a.stats[k], y = b.stats && b.stats[k];
+    out.stats[k] = !x ? y : !y ? x : (y.n > x.n || (y.n === x.n && y.ls > x.ls)) ? y : x;
+  }
+  for (const src of [a.rec || {}, b.rec || {}]) for (const k in src) if (!out.rec[k] || better(k, src[k], out.rec[k])) out.rec[k] = src[k];
+  out.done = Object.assign({}, a.done, b.done);
+  const hm = new Map(); for (const h of [...(a.hist || []), ...(b.hist || [])]) hm.set(h.id, h);
+  out.hist = [...hm.values()].sort((p, q) => q.id - p.id).slice(0, 40);
+  return out;
+}
+
+let dbRef = null, pushing = false, pushAgain = false;
+function setSync(s) {
+  const el = $('sync');
+  el.hidden = false;
+  el.className = 'sync' + (s === 'ok' ? ' ok' : s === 'err' ? ' err' : '');
+  el.textContent = s === 'ok' ? 'прогресс синхронизирован' : s === 'err' ? 'синхронизация не удалась' : 'только на этом устройстве';
+}
+async function push() {
+  if (!dbRef) return;
+  if (pushing) { pushAgain = true; return; }
+  pushing = true;
+  try { await dbRef.set({json: JSON.stringify(store), upd: store.upd}); setSync('ok'); }
+  catch (e) { setSync('err'); }
+  pushing = false;
+  if (pushAgain) { pushAgain = false; push(); }
+}
+async function initSync() {
+  const c = window.claude;
+  if (!c || typeof c.use !== 'function') return;
+  try {
+    const [db, user] = await Promise.all([c.use('db'), c.use('user')]);
+    if (!db || !user) return;
+    const id = await user.id();
+    if (!id) return;
+    const ref = db.doc('data/users/' + id + '/progress');
+    const snap = await ref.get();
+    dbRef = ref;
+    let remote = null;
+    if (snap.exists) { try { remote = JSON.parse(snap.data().json); } catch (e) {} }
+    if (remote && remote.v === 1) {
+      store = merge(store, remote);
+      writeLocal();
+      if (screen === 'home') renderHome();
+      if (JSON.stringify(store) !== JSON.stringify(merge(remote, remote))) push(); else setSync('ok');
+    } else if (store.hist.length || Object.keys(store.stats).length) {
+      push();
+    } else setSync('ok');
+  } catch (e) { setSync('local'); }
+}
+
+/* ================= adaptive picking ================= */
+function weight(k) {
+  const s = store.stats[k];
+  if (!s || !s.n) return 2.5;
+  return 1 + 5 * s.er + Math.min(2.5, Math.max(0, (s.t - 1000) / 700)) + (s.n < 3 ? 1.5 : 0);
+}
+function mastery(k) {
+  const s = store.stats[k];
+  if (!s || !s.n) return 'none';
+  if (s.er >= .3) return 'bad';
+  if (s.er >= .12 || s.t > TARGET || s.n < 3) return 'mid';
+  return 'good';
+}
+function recordStat(k, ok, dt) {
+  const s = store.stats[k] || (store.stats[k] = {n:0, e:0, er:.2, t:0, ls:0});
+  s.n++; if (!ok) s.e++;
+  s.er = Math.round((s.er * .75 + (ok ? 0 : .25)) * 1e4) / 1e4;
+  if (ok) { const d = Math.min(dt, 8000); s.t = Math.round(s.t ? s.t * .7 + d * .3 : d); }
+  s.ls = Date.now();
+  saveLocal();
+}
+
+/* ================= drill ================= */
+// sprint: 60 с чистого времени на ответы, полный рандом, очки = верные ответы
+// learn: N карточек, подбор по слабым местам, повтор ошибочных клеток, разбор
+const SPRINT_MS = 60000;
+let screen = 'home';
+const S = {active:false};
+
+function show(id) {
+  screen = id;
+  for (const s of ['home','game','result']) $(s).hidden = s !== id;
+  window.scrollTo(0, 0);
+}
+
+let wakeLock = null;
+async function wake(on) {
+  try {
+    if (on && navigator.wakeLock) wakeLock = await navigator.wakeLock.request('screen');
+    else if (!on && wakeLock) { await wakeLock.release(); wakeLock = null; }
+  } catch (e) {}
+}
+
+function startSession() {
+  const lv = LEVELS.find(l => l.id === store.prefs.lv) || LEVELS[0];
+  const cells = [];
+  for (const col of lv.cols) for (const c of CASES) for (const g of GN) cells.push(col + c + g);
+  Object.assign(S, {
+    active:true, mode: store.prefs.mode === 'learn' ? 'learn' : 'sprint', lv, len:store.prefs.len, hints:store.prefs.hints,
+    cells, seen:new Set(), retry:[], served:0, extra:0, total:0, used:0, correct:0, errors:0, times:[], misses:[],
+    prevKey:null, card:null, lock:true, feedback:false, fbReady:0, t0:0, paused:0, pausedAt:0, startedAt:Date.now()
+  });
+  recentN.length = recentA.length = recentF.length = 0;
+  $('quitSheet').hidden = true;
+  show('game');
+  wake(true);
+  next();
+  requestAnimationFrame(tick);
+}
+
+function nextKey() {
+  const prev = S.prevKey;
+  if (S.mode === 'sprint') {
+    // полный рандом: все клетки равновероятны, только не одна и та же дважды подряд
+    let k = pick(S.cells);
+    while (k === prev && S.cells.length > 1) k = pick(S.cells);
+    return {key: k};
+  }
+  const left = S.len + S.extra - S.served;
+  if (S.retry.length) {
+    const i = S.retry.findIndex(r => r.due <= S.served);
+    if (i >= 0 || left <= S.retry.length) return {key: S.retry.splice(i >= 0 ? i : 0, 1)[0].key, retry:true};
+  }
+  if (prev && S.lv.cols.length > 1 && Math.random() < .22) {
+    const rest = prev.slice(1);
+    const others = S.lv.cols.filter(c => c !== prev[0] && END[c][rest[0]][rest.slice(1)] !== END[prev[0]][rest[0]][rest.slice(1)]).map(c => c + rest);
+    if (others.length) return {key: pick(others)};
+  }
+  const unseen = S.cells.filter(k => !S.seen.has(k) && k !== prev);
+  if (unseen.length && Math.random() < .45) return {key: pick(unseen)};
+  return {key: wpick(S.cells.filter(k => k !== prev).map(k => [k, weight(k)]))};
+}
+
+function next() {
+  if (!S.active) return;
+  if (S.mode === 'sprint' ? S.used >= SPRINT_MS : S.served >= S.len + S.extra) return finish();
+  const {key, retry} = nextKey();
+  S.prevKey = key; S.seen.add(key);
+  S.card = makeCard(key, retry);
+  S.served++;
+  renderCard();
+}
+
+function renderCard() {
+  const card = S.card;
+  S.lock = true; S.feedback = false;
+  let chips = '';
+  if (S.hints) chips += `<span class="chip case">${CASE_LBL[card.c]}</span><span class="chip g-${card.g}">${GN_LBL[card.g]}</span>`;
+  if (card.retry) chips += `<span class="chip rep">повтор</span>`;
+  $('chips').innerHTML = chips;
+  $('sentence').innerHTML = sentenceHTML(card, '', '', S.hints);
+  $('tlabel').textContent = ''; $('tlabel').className = 'tlabel';
+  $('fb').hidden = true;
+  for (const b of $('keys').children) b.className = 'key';
+  $('fuse').classList.remove('late'); $('fuseBar').style.width = '0%';
+  updateBar();
+  // таймер стартует после отрисовки карточки; setTimeout страхует, если кадры не идут
+  const arm = () => {
+    if (!S.active || S.card !== card || S.t0Card === card) return;
+    S.t0Card = card;
+    S.t0 = performance.now(); S.paused = 0; if (S.pausedAt) S.pausedAt = S.t0; S.lock = false;
+  };
+  requestAnimationFrame(() => requestAnimationFrame(arm));
+  setTimeout(arm, 120);
+}
+
+function elapsed() {
+  if (!S.t0) return 0;
+  const now = S.pausedAt || performance.now();
+  return Math.max(0, now - S.t0 - S.paused);
+}
+
+function tick() {
+  if (!S.active) return;
+  if (!S.lock && !S.feedback) {
+    const dt = elapsed();
+    if (S.mode === 'sprint') {
+      const left = SPRINT_MS - S.used - dt;
+      if (left <= 0) { S.lock = true; S.used = SPRINT_MS; finish(); return; }
+      $('clock').textContent = (left / 1000).toFixed(1);
+      $('fuseBar').style.width = left / SPRINT_MS * 100 + '%';
+      $('fuse').classList.toggle('late', left < 10000);
+    } else {
+      $('clock').textContent = fmt(S.total + dt);
+      $('fuseBar').style.width = Math.min(100, dt / TARGET * 100) + '%';
+      $('fuse').classList.toggle('late', dt > TARGET);
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+function updateBar() {
+  $('errs').textContent = S.errors ? `${S.errors} ✕` : '';
+  if (S.mode === 'sprint') {
+    const left = Math.max(0, SPRINT_MS - S.used);
+    $('prog').textContent = `✓ ${S.correct}`;
+    $('clock').textContent = (left / 1000).toFixed(1);
+    $('fuseBar').style.width = left / SPRINT_MS * 100 + '%';
+    $('fuse').classList.toggle('late', left < 10000);
+    return;
+  }
+  $('prog').textContent = `${S.served} / ${S.len}` + (S.extra ? ` +${S.extra}` : '');
+  $('clock').textContent = fmt(S.total);
+}
+
+function answer(i) {
+  if (!S.active || S.lock || S.feedback || S.pausedAt) return;
+  const card = S.card, opt = OPTS[i];
+  const dt = elapsed();
+  S.lock = true;
+  const ok = opt === card.ans;
+  recordStat(card.key, ok, dt);
+  S.times.push(dt);
+  const keys = $('keys').children;
+  if (!ok) S.misses.push({html: sentenceHTML(card, card.ans, 'ok', true), picked: opt, why: explain(card)});
+
+  if (S.mode === 'sprint') {
+    S.used += dt;
+    if (ok) {
+      S.correct++;
+      keys[i].classList.add('hit');
+      $('sentence').innerHTML = sentenceHTML(card, card.ans, 'ok', S.hints);
+    } else {
+      S.used += PENALTY; S.errors++;
+      keys[i].classList.add('miss');
+      keys[OPTS.indexOf(card.ans)].classList.add('want');
+      $('sentence').innerHTML = sentenceHTML(card, card.ans, 'fix', true);
+      const tl = $('tlabel'); tl.textContent = `−${PENALTY / 1000} с`; tl.className = 'tlabel pen';
+      try { navigator.vibrate && navigator.vibrate(60); } catch (e) {}
+    }
+    updateBar();
+    // пауза на вспышку не тратит время спринта: часы идут только пока карточка ждёт ответа
+    setTimeout(() => { if (S.active && S.card === card) next(); }, ok ? 180 : 750);
+    return;
+  }
+
+  if (ok) {
+    S.total += dt;
+    keys[i].classList.add('hit');
+    $('sentence').innerHTML = sentenceHTML(card, card.ans, 'ok', S.hints);
+    const tl = $('tlabel'); tl.textContent = (dt / 1000).toFixed(2) + ' с'; tl.className = 'tlabel' + (dt > TARGET ? ' slow' : '');
+    updateBar();
+    setTimeout(() => { if (S.active && S.card === card) next(); }, 260);
+  } else {
+    S.total += dt + PENALTY; S.errors++;
+    if (S.extra < S.len) { S.extra++; S.retry.push({key: card.key, due: S.served + 2 + rnd(3)}); }
+    keys[i].classList.add('miss');
+    keys[OPTS.indexOf(card.ans)].classList.add('want');
+    $('sentence').innerHTML = sentenceHTML(card, card.ans, 'fix', true);
+    const fb = $('fb');
+    fb.innerHTML = `<div class="fb-top"><span class="fb-pen">+${PENALTY / 1000} с</span><span>Нужно <b class="mono">-${card.ans}</b>, а не <s class="mono">-${opt}</s></span></div>` +
+      `<p class="fb-why"></p><button type="button" class="next" id="nextBtn">Дальше</button>`;
+    fb.querySelector('.fb-why').textContent = S.misses[S.misses.length - 1].why;
+    fb.hidden = false;
+    S.feedback = true; S.fbReady = performance.now() + 350;
+    $('fuseBar').style.width = '100%'; $('fuse').classList.add('late');
+    try { navigator.vibrate && navigator.vibrate(60); } catch (e) {}
+    updateBar();
+  }
+}
+
+function cont() {
+  if (!S.active || !S.feedback || performance.now() < S.fbReady || S.pausedAt) return;
+  S.feedback = false;
+  next();
+}
+
+function pause() { if (S.active && !S.pausedAt) S.pausedAt = performance.now(); }
+function resume() { if (S.active && S.pausedAt) { S.paused += performance.now() - S.pausedAt; S.pausedAt = 0; } }
+
+function setStats(pairs) {
+  $('rStats').innerHTML = pairs.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+}
+
+function finish() {
+  S.active = false;
+  wake(false);
+  const n = S.times.length;
+  const avg = n ? S.times.reduce((a, b) => a + b, 0) / n : 0;
+  if (S.mode === 'sprint') finishSprint(n, avg); else finishLearn(n, avg);
+  saveLocal(); push();
+
+  $('rMissWrap').hidden = !S.misses.length;
+  const ul = $('rMiss'); ul.innerHTML = '';
+  for (const m of S.misses.slice(0, 15)) {
+    const li = document.createElement('li');
+    li.innerHTML = `<div class="ms">${m.html}</div><div class="mw">Ты нажал -${m.picked}. </div>`;
+    li.querySelector('.mw').append(m.why);
+    ul.append(li);
+  }
+  if (S.misses.length > 15) { const li = document.createElement('li'); li.className = 'mw'; li.textContent = `и ещё ${S.misses.length - 15}.`; ul.append(li); }
+  $('shareNote').hidden = true;
+  show('result');
+}
+
+function finishSprint(n, avg) {
+  const rk = `sp-${S.lv.id}-${S.hints ? 'h' : 'n'}`;
+  const prev = store.rec[rk];
+  const cur = {score: S.correct, err: S.errors, avg: Math.round(avg), at: Date.now()};
+  const isRec = n > 0 && (!prev || better(rk, cur, prev));
+  if (isRec) store.rec[rk] = cur;
+  store.hist.unshift({id: S.startedAt, m: 'sp', lv: S.lv.id, h: S.hints, score: S.correct, err: S.errors, n, avg: Math.round(avg)});
+  store.hist = store.hist.slice(0, 40);
+
+  const head = `Спринт · ${S.lv.name}${S.hints ? '' : ' · без подсказок'}`;
+  $('rLevel').textContent = head;
+  $('rTime').textContent = S.correct;
+  $('rUnit').textContent = 'верных ответов за 60 секунд';
+  const rr = $('rRec');
+  if (isRec && prev) { rr.textContent = `Новый рекорд! Было ${prev.score}.`; rr.className = 'r-rec new'; }
+  else if (isRec) { rr.textContent = 'Первый результат на этой ступени. Теперь его надо побить.'; rr.className = 'r-rec new'; }
+  else if (prev && prev.score === S.correct) { rr.textContent = `Как рекорд (${prev.score}), но ошибок больше: было ${prev.err}.`; rr.className = 'r-rec'; }
+  else { rr.textContent = prev ? `Рекорд ${prev.score}, не хватило ${prev.score - S.correct}.` : ''; rr.className = 'r-rec'; }
+  setStats([
+    ['Ошибки', S.errors],
+    ['Точность', n ? Math.round(S.correct / n * 100) + ' %' : '—'],
+    ['Среднее', (avg / 1000).toFixed(2) + ' с'],
+    ['Рекорд', (isRec ? cur : prev) ? (isRec ? cur : prev).score : '—']
+  ]);
+  $('rGoalWrap').hidden = true;
+  $('share').hidden = false;
+  S.shareText = `Endungen, спринт 60 с, ${S.lv.name}${S.hints ? '' : ' без подсказок'}: ${S.correct} верных, ${S.errors} ${plural(S.errors, 'ошибка', 'ошибки', 'ошибок')}. Побьёшь?`;
+}
+
+function finishLearn(n, avg) {
+  const slow = S.times.filter(t => t > TARGET).length;
+  const total = Math.round(S.total);
+  const rk = `${S.lv.id}-${S.len}-${S.hints ? 'h' : 'n'}`;
+  const prev = store.rec[rk];
+  const isRec = !prev || total < prev.ms;
+  if (isRec) store.rec[rk] = {ms: total, err: S.errors, avg: Math.round(avg), at: Date.now()};
+  const goal = [S.len === 40, S.errors < 4, avg < TARGET];
+  const passed = goal.every(Boolean);
+  if (passed && !store.done[S.lv.id]) store.done[S.lv.id] = Date.now();
+  store.hist.unshift({id: S.startedAt, lv: S.lv.id, len: S.len, h: S.hints, ms: total, err: S.errors, n, avg: Math.round(avg)});
+  store.hist = store.hist.slice(0, 40);
+
+  $('rLevel').textContent = `Обучение · ${S.lv.name} · ${S.len} карточек${S.hints ? '' : ' · без подсказок'}`;
+  $('rTime').textContent = fmt(total);
+  $('rUnit').textContent = 'общее время вместе со штрафами';
+  const rr = $('rRec');
+  if (isRec && prev) { rr.textContent = `Новый рекорд! Было ${fmt(prev.ms)}, быстрее на ${fmt(prev.ms - total)}.`; rr.className = 'r-rec new'; }
+  else if (isRec) { rr.textContent = 'Первый результат на этой ступени. Теперь его надо побить.'; rr.className = 'r-rec new'; }
+  else { rr.textContent = `Рекорд ${fmt(prev.ms)}, не хватило ${fmt(total - prev.ms)}.`; rr.className = 'r-rec'; }
+  setStats([['Ошибки', S.errors], ['Среднее', (avg / 1000).toFixed(2) + ' с'], ['Дольше 2 с', slow], ['Карточек', n]]);
+  const gl = [['40 карточек за раз', goal[0]], [`меньше 4 ошибок (было ${S.errors})`, goal[1]], [`в среднем быстрее 2 с (было ${(avg / 1000).toFixed(2)} с)`, goal[2]]];
+  $('rGoal').innerHTML = gl.map(([t, y]) => `<li class="${y ? 'y' : ''}">${t}</li>`).join('');
+  const note = $('rGoalNote');
+  const idx = LEVELS.findIndex(l => l.id === S.lv.id);
+  if (passed) {
+    note.className = 'goal-note win';
+    note.textContent = idx < 2 ? `Ступень пройдена. Можно переходить к «${LEVELS[idx + 1].name}».` : 'Ступень пройдена. Дальше: выключить подсказки рода и падежа.';
+  } else {
+    note.className = 'goal-note';
+    note.textContent = S.len === 20 ? 'Критерий считается только на 40 карточках.' : 'Пока не всё. Ошибочные клетки будут попадаться чаще.';
+  }
+  $('rGoalWrap').hidden = false;
+  $('share').hidden = true;
+}
+
+function plural(n, one, few, many) {
+  const a = n % 10, b = n % 100;
+  if (a === 1 && b !== 11) return one;
+  if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return few;
+  return many;
+}
+
+// Ссылка на игру добавляется, только когда страница открыта как обычный сайт
+function shareUrl() {
+  if (window.claude || !/^https?:$/.test(location.protocol)) return '';
+  return location.origin + location.pathname;
+}
+async function share() {
+  const url = shareUrl();
+  const text = S.shareText || '';
+  const note = $('shareNote');
+  if (navigator.share && url) {
+    try { await navigator.share({text, url}); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  const full = url ? `${text} ${url}` : text;
+  try {
+    await navigator.clipboard.writeText(full);
+    note.textContent = 'Скопировано. Вставь в чат.';
+  } catch (e) {
+    note.textContent = full;
+  }
+  note.hidden = false;
+}
+
+function quitSession() {
+  S.active = false;
+  wake(false);
+  $('quitSheet').hidden = true;
+  push();
+  renderHome();
+  show('home');
+}
+
+/* ================= home ================= */
+let masked = false;
+function renderHome() {
+  const p = store.prefs;
+  const sprint = p.mode !== 'learn';
+  $('mode-sprint').setAttribute('aria-checked', String(sprint));
+  $('mode-learn').setAttribute('aria-checked', String(!sprint));
+  $('lenSeg').hidden = sprint;
+  $('start').textContent = sprint ? 'Старт · 60 секунд' : 'Старт';
+  $('modeNote').textContent = sprint
+    ? `60 секунд чистого времени на ответы. Верный ответ = +1 очко, ошибка = −${PENALTY / 1000} с. Все клетки таблицы выпадают одинаково часто.`
+    : `Ошибка = +${PENALTY / 1000} с к времени и короткий разбор, а та же клетка вернётся через пару карточек с другими словами. Слабые клетки выпадают чаще. Ступень пройдена, когда 40 карточек идут меньше чем с 4 ошибками и в среднем быстрее 2 с.`;
+  const lvEl = $('levels'); lvEl.innerHTML = '';
+  for (const l of LEVELS) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'lvl ' + (l.focus ? 'focus' : 'main'); b.setAttribute('role', 'radio'); b.id = 'lv-' + l.id;
+    b.setAttribute('aria-checked', String(l.id === p.lv));
+    const rec = store.rec[sprint ? `sp-${l.id}-${p.hints ? 'h' : 'n'}` : `${l.id}-${p.len}-${p.hints ? 'h' : 'n'}`];
+    const recTxt = !rec ? '—' : sprint ? rec.score : fmt(rec.ms);
+    b.innerHTML = `<span class="lvl-name">${l.name}${store.done[l.id] ? '<span class="done">пройдена</span>' : ''}</span>` +
+      `<span class="lvl-sub">${l.sub}</span>` +
+      `<span class="lvl-rec">${recTxt}<small>${sprint ? 'рекорд' : 'рекорд · ' + p.len}</small></span>`;
+    b.addEventListener('click', () => { store.prefs.lv = l.id; saveLocal(); renderHome(); });
+    lvEl.append(b);
+  }
+  $('len20').setAttribute('aria-checked', String(p.len === 20));
+  $('len40').setAttribute('aria-checked', String(p.len === 40));
+  $('hints').checked = !!p.hints;
+
+  const lv = LEVELS.find(l => l.id === p.lv) || LEVELS[0];
+  let h = '<thead><tr><th></th><th scope="col">der</th><th scope="col">ein</th><th scope="col">без</th></tr></thead><tbody>';
+  for (const c of CASES) GN.forEach((g, gi) => {
+    h += `<tr${gi === 0 && c !== 'N' ? ' class="sep"' : ''}><th scope="row"><span class="cs">${CASE_LBL[c]}</span> ${GN_LBL[g]}</th>`;
+    for (const col of ['w','x','s']) {
+      const k = col + c + g;
+      h += `<td class="${mastery(k)}${lv.cols.includes(col) ? '' : ' off'}">${masked ? '·' : '-' + END[col][c][g]}</td>`;
+    }
+    h += '</tr>';
+  });
+  $('map').innerHTML = h + '</tbody>';
+  $('maskBtn').textContent = masked ? 'показать окончания' : 'спрятать окончания';
+
+  const hl = $('hist'); hl.innerHTML = '';
+  for (const r of store.hist.slice(0, 8)) {
+    const d = new Date(r.id);
+    const lvl = LEVELS.find(l => l.id === r.lv);
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="h-d">${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}</span>` +
+      `<span>${r.m === 'sp' ? 'Спринт · ' : ''}${lvl ? lvl.name : r.lv}${r.m === 'sp' ? '' : ' · ' + r.len}${r.h ? '' : ' · без подск.'}</span>` +
+      `<span class="h-t">${r.m === 'sp' ? r.score + ' ✓' : fmt(r.ms)}</span><span class="h-e${r.err ? '' : ' zero'}">${r.err ? r.err + ' ✕' : '0'}</span>`;
+    hl.append(li);
+  }
+  $('histEmpty').hidden = store.hist.length > 0;
+}
+
+/* ================= wiring ================= */
+const keysEl = $('keys');
+OPTS.forEach((o, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'key'; b.id = 'key-' + o;
+  b.innerHTML = `<span>-${o}</span><span class="kn">${i + 1}</span>`;
+  b.setAttribute('aria-label', 'окончание -' + o);
+  b.addEventListener('pointerdown', e => { e.preventDefault(); answer(i); });
+  keysEl.append(b);
+});
+$('stage').addEventListener('click', cont);
+$('start').addEventListener('click', startSession);
+$('again').addEventListener('click', startSession);
+$('toMenu').addEventListener('click', () => { renderHome(); show('home'); });
+$('mode-sprint').addEventListener('click', () => { store.prefs.mode = 'sprint'; saveLocal(); renderHome(); });
+$('mode-learn').addEventListener('click', () => { store.prefs.mode = 'learn'; saveLocal(); renderHome(); });
+$('share').addEventListener('click', share);
+$('len20').addEventListener('click', () => { store.prefs.len = 20; saveLocal(); renderHome(); });
+$('len40').addEventListener('click', () => { store.prefs.len = 40; saveLocal(); renderHome(); });
+$('hints').addEventListener('change', e => { store.prefs.hints = e.target.checked; saveLocal(); renderHome(); });
+$('maskBtn').addEventListener('click', () => { masked = !masked; renderHome(); });
+$('quit').addEventListener('click', () => { pause(); $('quitSheet').hidden = false; $('resume').focus(); });
+$('resume').addEventListener('click', () => { $('quitSheet').hidden = true; resume(); });
+$('quitYes').addEventListener('click', quitSession);
+
+document.addEventListener('visibilitychange', () => {
+  if (!S.active || !$('quitSheet').hidden) return;
+  if (document.hidden) pause(); else resume();
+});
+document.addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (screen === 'game' && S.active) {
+    if (!$('quitSheet').hidden) { if (e.key === 'Escape') { $('quitSheet').hidden = true; resume(); } return; }
+    const n = '12345'.indexOf(e.key);
+    if (n >= 0) { e.preventDefault(); answer(n); return; }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cont(); return; }
+    if (e.key === 'Escape') { pause(); $('quitSheet').hidden = false; }
+  } else if ((screen === 'home' || screen === 'result') && e.key === 'Enter' && e.target === document.body) {
+    startSession();
+  }
+});
+
+renderHome();
+show('home');
+initSync();
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+</body>
+</html>
